@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     timestamps: false,
     classMethods: {
       associate: function(models) {
-        //Invoice.belongsTo(models.Artist, {foreignKey: 'ArtistId'});
+        Invoice.belongsTo(models.Customer, {foreignKey: 'CustomerId'});
         // associations can be defined here
       }
     }
