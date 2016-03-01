@@ -48,6 +48,11 @@ app.get('/albums', (req, res) => {
     .then(albums => res.send(albums));
 });
 
+app.get('/invoices', (req, res) => {
+  models.Invoice.findAll()
+    .then(invoices => res.send(invoices));
+});
+
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
