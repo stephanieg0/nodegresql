@@ -2,7 +2,7 @@
 
 const express = require('express');
 
-const Genre = require('./models/').Genre;
+const models = require('./models/');
 
 const PORT = process.env.PORT || 3000;
 
@@ -15,11 +15,26 @@ app.get('/', (req, res) => {
 });
 
 app.get('/genres', (req, res) => {
-  Genre.findAll().then((genres) => {
+  models.Genre.findAll().then((genres) => {
   res.send(genres);
   });
 });
 
+app.get('/mediatypes', (req, res) => {
+  models.MediaType.findAll()
+    .then(types => res.send(types));
+});
+
+
+app.get('/artist', (req, res) => {
+  models.Artist.findAll()
+    .then(artists => res.send(artists));
+});
+
+app.get('/playlist', (req, res) => {
+  models.Playlist.findAll()
+    .then(playlist => res.send(playlist));
+});
 
 app.listen(PORT, () => {
   console.log(`listening on port ${PORT}`);
