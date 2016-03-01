@@ -62,6 +62,16 @@ app.get('/invoices', (req, res) => {
     .then(invoices => res.send(invoices));
 });
 
+app.get('/invoices/:id', (req, res) => {
+  models.Invoice.findOne({
+      where: {
+        InvoiceId: req.params.id
+      }
+    })
+    .then(invoice => res.send(invoice));
+});
+
+
 app.get('/customers', (req, res) => {
   models.Customer.findAll()
     .then(customers => res.send(customers));
