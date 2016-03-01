@@ -15,6 +15,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/genres', (req, res) => {
+  //using sequelizejs to find models and extract data.
   models.Genre.findAll().then((genres) => {
   res.send(genres);
   });
@@ -93,6 +94,20 @@ app.get('/customers/:id/invoices', (req, res) => {
     include: models.Invoice
   })
   .then(invoices => res.send(invoices));
+});
+
+app.get('/employees', (req, res) =>{
+  models.Employee.findAll({
+    attributes: ['EmployeeId', 'FirstName', 'ReportsTo']
+  }).
+    then(employees => res.send(employees));
+});
+
+app.get('/employees/:id', (req, res) =>{
+  models.Employee.findAll({
+    where: {ReportsTo: req.params.id}
+  }).
+    then(employees => res.send(employees));
 });
 
 app.listen(PORT, () => {
